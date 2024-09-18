@@ -7,16 +7,24 @@ const FontUpload = () => {
     const [fontGroups, setFontGroups] = useState([]);
 
     // Fetch font groups from the server
+    const fetchFonts = async () => {
+        try {
+            const response = await fetch('http://localhost/zepto-font-group-backend/get-fonts.php');
+            const result = await response.json();
+
+            if (result.success) {
+                setFontGroups(result.fonts);
+            } else {
+                setMessage('Failed to load fonts.');
+            }
+        } catch (error) {
+            setMessage('An error occurred while fetching fonts.');
+            console.error(error);
+        }
+    };
+
     useEffect(() => {
-        fetch('http://localhost/zepto-font-group-backend/get-fonts.php')
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.success) {
-                    setFontGroups(data.fonts);
-                } else {
-                    setMessage(data.error);
-                }
-            });
+        fetchFonts()
     }, []);
 
     const handleFileChange = (e) => {
@@ -33,11 +41,6 @@ const FontUpload = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!fontFile || !groupName) {
-            setMessage('Please provide a font file and group name.');
-            return;
-        }
-
         const formData = new FormData();
         formData.append('groupName', groupName);
         formData.append('fontFile', fontFile);
@@ -49,19 +52,15 @@ const FontUpload = () => {
             });
 
             const result = await response.json();
+
             if (result.success) {
                 setMessage(result.message);
-                // Reload font groups after successful upload
-                fetch('http://localhost/zepto-font-group-backend/get-fonts.php')
-                    .then((res) => res.json())
-                    .then((data) => {
-                        setFontGroups(data.fonts);
-                    });
             } else {
                 setMessage(result.error || 'Failed to upload font.');
             }
         } catch (error) {
-            setMessage('An error occurred. Please try again.');
+            setMessage('An error occurred while uploading the font.');
+            console.error(error);
         }
     };
 
