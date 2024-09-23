@@ -42,23 +42,25 @@ const FontList = () => {
     };
 
     return (
-        <div>
-            <h2>Uploaded Fonts</h2>
-            {message && <p>{message}</p>}
+        <div className="centered-container">
+            <div className="centered-content">
+                <h2>Uploaded Fonts</h2>
+                {message && <p>{message}</p>}
 
-            <ul>
-                {fonts.map((font) => (
-                    <li key={font.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <span>{font.font_name}</span>
-                        <button
-                            onClick={() => handleDeleteFont(font.id)}
-                            style={{ background: 'red', color: 'white', border: 'none', cursor: 'pointer' }}
-                        >
-                            Delete
-                        </button>
-                    </li>
-                ))}
-            </ul>
+                <ul>
+                    {fonts.map((font) => (
+                        <li key={font.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <span>{font.font_name}</span>
+                            <button
+                                onClick={() => handleDeleteFont(font.id)}
+                                style={{ background: 'red', color: 'white', border: 'none', cursor: 'pointer' }}
+                            >
+                                Delete
+                            </button>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 };

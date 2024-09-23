@@ -58,43 +58,45 @@ const EditFontGroup = () => {
     };
 
     return (
-        <div>
-            <h3>Edit Font Group</h3>
-            <form onSubmit={handleUpdateGroup}>
-                <div>
-                    <label>Group Name:</label>
-                    <input
-                        type="text"
-                        value={groupName}
-                        onChange={(e) => setGroupName(e.target.value)}
-                        required
-                    />
-                </div>
+        <div className="centered-container">
+            <div className="centered-content">
+                <h3>Edit Font Group</h3>
+                <form onSubmit={handleUpdateGroup}>
+                    <div>
+                        <label>Group Name:</label>
+                        <input
+                            type="text"
+                            value={groupName}
+                            onChange={(e) => setGroupName(e.target.value)}
+                            required
+                        />
+                    </div>
 
-                <div>
-                    <h4>Select Fonts</h4>
-                    {allFonts.map((font) => (
-                        <div key={font.id}>
-                            <input
-                                type="checkbox"
-                                value={font.id}
-                                checked={selectedFonts.includes(font.id)}
-                                onChange={(e) => {
-                                    const fontId = parseInt(e.target.value);
-                                    if (e.target.checked) {
-                                        setSelectedFonts([...selectedFonts, fontId]);
-                                    } else {
-                                        setSelectedFonts(selectedFonts.filter(id => id !== fontId));
-                                    }
-                                }}
-                            />
-                            <label>{font.font_name}</label>
-                        </div>
-                    ))}
-                </div>
+                    <div>
+                        <h4>Select Fonts</h4>
+                        {allFonts.map((font) => (
+                            <div key={font.id}>
+                                <input
+                                    type="checkbox"
+                                    value={font.id}
+                                    checked={selectedFonts.includes(font.id)}
+                                    onChange={(e) => {
+                                        const fontId = parseInt(e.target.value);
+                                        if (e.target.checked) {
+                                            setSelectedFonts([...selectedFonts, fontId]);
+                                        } else {
+                                            setSelectedFonts(selectedFonts.filter(id => id !== fontId));
+                                        }
+                                    }}
+                                />
+                                <label>{font.font_name}</label>
+                            </div>
+                        ))}
+                    </div>
 
-                <button type="submit">Update Group</button>
-            </form>
+                    <button type="submit">Update Group</button>
+                </form>
+            </div>
         </div>
     );
 };

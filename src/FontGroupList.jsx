@@ -44,17 +44,19 @@ const FontGroupList = () => {
     };
 
     return (
-        <div>
-            <h2>Font Groups</h2>
-            <ul>
-                {fontGroups.map((group) => (
-                    <li key={group.id}>
-                        <h3>{group.group_name}</h3>
-                        <button onClick={() => handleDelete(group.id)}>Delete</button>
-                        <button onClick={() => handleEdit(group.id)}>Edit</button>
-                    </li>
-                ))}
-            </ul>
+        <div className="centered-container">
+            <div className="centered-content">
+                <h2>Font Groups</h2>
+                <ul>
+                    {fontGroups.map((group) => (
+                        <li key={group.id}>
+                            <h3>{group.group_name}</h3>
+                            <button onClick={() => handleDelete(group.id)}>Delete</button>
+                            <button onClick={() => handleEdit(group.id)}>Edit</button>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 };

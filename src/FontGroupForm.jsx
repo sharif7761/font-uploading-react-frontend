@@ -65,40 +65,42 @@ const FontGroupForm = () => {
     };
 
     return (
-        <div>
-            <h2>Create Font Group</h2>
-            <input
-                type="text"
-                value={groupName}
-                onChange={handleGroupNameChange}
-                placeholder="Group Name"
-            />
+        <div className="centered-container">
+            <div className="centered-content">
+                <h2>Create Font Group</h2>
+                <input
+                    type="text"
+                    value={groupName}
+                    onChange={handleGroupNameChange}
+                    placeholder="Group Name"
+                />
 
-            {rows.map((row, index) => (
-                <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-                    <select
-                        value={row.selectedFont}
-                        onChange={(e) => handleFontSelect(index, e.target.value)}
-                        style={{ marginRight: '10px' }}
-                    >
-                        <option value="">Select a Font</option>
-                        {fonts.map((font) => (
-                            <option key={font.id} value={font.id}>
-                                {font.font_name}
-                            </option>
-                        ))}
-                    </select>
-                    {/* Add a cross (✖) button to remove the row */}
-                    <button onClick={() => handleRemoveRow(index)} style={{ background: 'red', color: 'white', border: 'none', cursor: 'pointer' }}>
-                        ✖
-                    </button>
-                </div>
-            ))}
+                {rows.map((row, index) => (
+                    <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                        <select
+                            value={row.selectedFont}
+                            onChange={(e) => handleFontSelect(index, e.target.value)}
+                            style={{ marginRight: '10px' }}
+                        >
+                            <option value="">Select a Font</option>
+                            {fonts.map((font) => (
+                                <option key={font.id} value={font.id}>
+                                    {font.font_name}
+                                </option>
+                            ))}
+                        </select>
+                        {/* Add a cross (✖) button to remove the row */}
+                        <button onClick={() => handleRemoveRow(index)} style={{ background: 'red', color: 'white', border: 'none', cursor: 'pointer' }}>
+                            ✖
+                        </button>
+                    </div>
+                ))}
 
-            <button onClick={handleAddRow} style={{ marginRight: '10px' }}>Add Row</button>
-            <button onClick={handleSubmit}>Create Group</button>
+                <button onClick={handleAddRow} style={{ marginRight: '10px' }}>Add Row</button>
+                <button onClick={handleSubmit}>Create Group</button>
 
-            {message && <p>{message}</p>}
+                {message && <p>{message}</p>}
+            </div>
         </div>
     );
 };

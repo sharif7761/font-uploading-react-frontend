@@ -6,6 +6,7 @@ import FontUpload from "./FontUpload.jsx";
 import FontGroupForm from "./FontGroupForm.jsx";
 import FontList from "./FontList.jsx";
 import Navbar from "./components/Navbar.jsx";
+import './App.css';
 
 const App = () => {
     return (
