@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const FontGroupList = () => {
     const [fontGroups, setFontGroups] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchFontGroups = async () => {
@@ -36,6 +38,11 @@ const FontGroupList = () => {
         }
     };
 
+    const handleEdit = (groupId) => {
+        // Navigate to the edit page with the selected group ID
+        navigate(`/font-group-edit/${groupId}`);
+    };
+
     return (
         <div>
             <h2>Font Groups</h2>
@@ -44,6 +51,7 @@ const FontGroupList = () => {
                     <li key={group.id}>
                         <h3>{group.group_name}</h3>
                         <button onClick={() => handleDelete(group.id)}>Delete</button>
+                        <button onClick={() => handleEdit(group.id)}>Edit</button>
                     </li>
                 ))}
             </ul>
