@@ -89,7 +89,6 @@ const FontGroupForm = () => {
                                 </option>
                             ))}
                         </select>
-                        {/* Add a cross (✖) button to remove the row */}
                         <button onClick={() => handleRemoveRow(index)} style={{ background: 'red', color: 'white', border: 'none', cursor: 'pointer' }}>
                             ✖
                         </button>

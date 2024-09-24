@@ -11,7 +11,6 @@ const FontUpload = () => {
     const handleUpload = async () => {
         const formData = new FormData();
         formData.append('fontFile', fontFile);
-        formData.append('groupName', groupName);
 
         try {
             const response = await fetch('http://localhost/zepto-font-group-backend/upload.php', {

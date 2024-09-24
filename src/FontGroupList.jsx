@@ -47,15 +47,25 @@ const FontGroupList = () => {
         <div className="centered-container">
             <div className="centered-content">
                 <h2>Font Groups</h2>
-                <ul>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Fonts</th>
+                        <th>Count</th>
+                        <th></th>
+                    </tr>
                     {fontGroups.map((group) => (
-                        <li key={group.id}>
-                            <h3>{group.group_name}</h3>
-                            <button onClick={() => handleDelete(group.id)}>Delete</button>
-                            <button onClick={() => handleEdit(group.id)}>Edit</button>
-                        </li>
-                    ))}
-                </ul>
+                        <tr key={group.id}>
+                            <td>{group.group_name}</td>
+                            <td>{group.fonts.map(u => u.font_name).join(', ')}</td>
+                            <td>{group.fonts.length}</td>
+                            <td>
+                                <button onClick={() => handleDelete(group.id)}>Delete</button>
+                                <button onClick={() => handleEdit(group.id)}>Edit</button>
+                            </td>
+                        </tr>
+                        ))}
+                </table>
             </div>
         </div>
     );
