@@ -3,6 +3,11 @@ import React, { useState, useEffect } from 'react';
 const FontList = () => {
     const [fonts, setFonts] = useState([]);
     const [message, setMessage] = useState('');
+    const [previewFont, setPreviewFont] = useState(null); // Store the font URL for preview
+
+    const handlePreview = (fontFilePath) => {
+        setPreviewFont(fontFilePath);
+    };
 
     // Fetch fonts when the component mounts
     useEffect(() => {
@@ -43,6 +48,24 @@ const FontList = () => {
             <div className="centered-content">
                 <h2>Uploaded Fonts</h2>
                 {message && <p>{message}</p>}
+
+                {previewFont && (
+                    <style>
+                        {`
+                    @font-face {
+                        font-family: 'UploadedFont';
+                        src: url('${previewFont}');
+                    }
+                    .preview-text {
+                        font-family: 'UploadedFont';
+                        font-size: 24px;
+                        font-weight: bold;
+                    }
+                `}
+                    </style>
+                )}
+
+
                 <table>
                     <tr>
                         <th>Font Name</th>
@@ -52,7 +75,9 @@ const FontList = () => {
                     {fonts.map((font) => (
                         <tr key={font.id}>
                             <td>{font.font_name}</td>
-                            <td>Example</td>
+                            <td>
+                                <button onClick={() => handlePreview(font.font_path)}>Preview</button>
+                            </td>
                             <td>
                                 <button
                                     onClick={() => handleDeleteFont(font.id)}
@@ -64,6 +89,12 @@ const FontList = () => {
                         </tr>
                     ))}
                 </table>
+                {previewFont && (
+                    <div>
+                        <h4>Example Style:</h4>
+                        <p className="preview-text">The quick brown fox jumps over the lazy dog</p>
+                    </div>
+                )}
             </div>
         </div>
     );
