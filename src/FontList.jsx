@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {apiUrl} from "./config.js";
 
 const FontList = () => {
     const [fonts, setFonts] = useState([]);
@@ -13,7 +14,7 @@ const FontList = () => {
     useEffect(() => {
         const fetchFonts = async () => {
             try {
-                const response = await fetch('http://localhost/zepto-font-group-backend/get-fonts.php');
+                const response = await fetch(`${apiUrl}/get-fonts.php`);
                 const result = await response.json();
                 setFonts(result.fonts || []);
             } catch (error) {
@@ -26,7 +27,7 @@ const FontList = () => {
     const handleDeleteFont = async (fontId) => {
         if (window.confirm('Are you sure you want to delete this font?')) {
             try {
-                const response = await fetch(`http://localhost/zepto-font-group-backend/delete-font.php`, {
+                const response = await fetch(`${apiUrl}/delete-font.php`, {
                     method: 'DELETE',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ font_id: fontId })

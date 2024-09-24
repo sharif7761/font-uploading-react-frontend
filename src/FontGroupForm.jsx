@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import {apiUrl} from "./config.js";
 
 const FontGroupForm = () => {
     const [fonts, setFonts] = useState([]);
@@ -10,7 +11,7 @@ const FontGroupForm = () => {
         // Fetch fonts on component mount
         const fetchFonts = async () => {
             try {
-                const response = await fetch('http://localhost/zepto-font-group-backend/get-fonts.php');
+                const response = await fetch(`${apiUrl}/get-fonts.php`);
                 const result = await response.json();
                 setFonts(result.fonts || []);
             } catch (error) {
@@ -52,7 +53,7 @@ const FontGroupForm = () => {
 
         // Submit the group with the selected fonts
         try {
-            const response = await fetch('http://localhost/zepto-font-group-backend/create-font-group.php', {
+            const response = await fetch(`${apiUrl}/create-font-group.php`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ groupName, fontIds: selectedFonts }),

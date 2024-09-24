@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {apiUrl} from "./config.js";
 
 const FontGroupList = () => {
     const [fontGroups, setFontGroups] = useState([]);
@@ -8,7 +9,7 @@ const FontGroupList = () => {
     useEffect(() => {
         const fetchFontGroups = async () => {
             try {
-                const response = await fetch('http://localhost/zepto-font-group-backend/get-font-groups.php');
+                const response = await fetch(`${apiUrl}/get-font-groups.php`);
                 const result = await response.json();
                 setFontGroups(result.groups || []);
             } catch (error) {
@@ -21,7 +22,7 @@ const FontGroupList = () => {
     const handleDelete = async (groupId) => {
         if (window.confirm('Are you sure you want to delete this group?')) {
             try {
-                const response = await fetch('http://localhost/zepto-font-group-backend/delete-font-group.php', {
+                const response = await fetch(`${apiUrl}/delete-font-group.php`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ groupId }),
@@ -61,7 +62,7 @@ const FontGroupList = () => {
                             <td>{group.fonts.length}</td>
                             <td>
                                 <button onClick={() => handleDelete(group.id)}>Delete</button>
-                                <button onClick={() => handleEdit(group.id)}>Edit</button>
+                                {/*<button onClick={() => handleEdit(group.id)}>Edit</button>*/}
                             </td>
                         </tr>
                         ))}

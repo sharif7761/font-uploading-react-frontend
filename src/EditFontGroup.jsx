@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import {apiUrl} from "./config.js";
 
 const EditFontGroup = () => {
     const { groupId } = useParams();
@@ -11,7 +12,7 @@ const EditFontGroup = () => {
     // Fetch available fonts from the backend
     const fetchAvailableFonts = async () => {
         try {
-            const response = await fetch('http://localhost/zepto-font-group-backend/get-fonts.php');
+            const response = await fetch(`${apiUrl}/get-fonts.php`);
             const data = await response.json();
             setAvailableFonts(data.fonts);
         } catch (error) {
@@ -22,7 +23,7 @@ const EditFontGroup = () => {
     // Fetch font group details by ID
     const fetchFontGroupDetails = async () => {
         try {
-            const response = await fetch(`http://localhost/zepto-font-group-backend/get-font-group.php?group_id=${groupId}`);
+            const response = await fetch(`${apiUrl}/get-font-group.php?group_id=${groupId}`);
             const data = await response.json();
             setGroupName(data.group_name || "");
             setSelectedFonts(data.font_ids || []);
@@ -65,7 +66,7 @@ const EditFontGroup = () => {
         }
 
         try {
-            const response = await fetch('http://localhost/zepto-font-group-backend/update-font-group.php', {
+            const response = await fetch(`${apiUrl}/update-font-group.php`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

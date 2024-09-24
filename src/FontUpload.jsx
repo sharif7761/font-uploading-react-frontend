@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
+import {apiUrl} from "./config.js";
 
 const FontUpload = () => {
     const [fontFile, setFontFile] = useState(null);
@@ -13,7 +14,7 @@ const FontUpload = () => {
         formData.append('fontFile', fontFile);
 
         try {
-            const response = await fetch('http://localhost/zepto-font-group-backend/upload.php', {
+            const response = await fetch(`${apiUrl}/upload.php`, {
                 method: 'POST',
                 body: formData,
             });
