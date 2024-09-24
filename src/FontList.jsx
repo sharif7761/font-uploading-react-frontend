@@ -30,9 +30,7 @@ const FontList = () => {
 
                 const result = await response.json();
                 setMessage(result.message || 'An error occurred while deleting the font');
-
-                // Remove the deleted font from the state
-                if (result.message === 'Font deleted successfully') {
+                if (result.status) {
                     setFonts(fonts.filter((font) => font.id !== fontId));
                 }
             } catch (error) {
