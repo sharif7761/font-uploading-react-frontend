@@ -18,7 +18,6 @@ const FontList = () => {
         fetchFonts();
     }, []);
 
-    // Delete font by ID
     const handleDeleteFont = async (fontId) => {
         if (window.confirm('Are you sure you want to delete this font?')) {
             try {
